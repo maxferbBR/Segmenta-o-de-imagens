@@ -1,0 +1,23 @@
+void setup() {
+  size(244, 183);
+  noLoop();
+}
+void draw() {
+  PImage img1 = loadImage("car4.jpg");
+  PImage img2 = loadImage("car3.jpg");
+  PImage img3 = createImage(img1.width, img1.height, RGB);
+  PImage img4 = createImage(img1.width, img1.height, RGB);
+  for (int y = 0; y < img1.height; y++) {
+    for (int x = 0; x < img1.width; x++) {
+      int pos = y*img1.width + x;
+      float valor = red(img1.pixels[pos]) + red(img2.pixels[pos]);
+      if (valor > 255) valor = 255;
+      img3.pixels[pos] = color(valor);
+      valor = red(img1.pixels[pos]) - red(img2.pixels[pos]);
+      if (valor < 0) valor = 0;
+      img4.pixels[pos] = color(valor);
+    }
+  }
+  image(img4, 0, 0);
+  save("img4.jpg");
+}
